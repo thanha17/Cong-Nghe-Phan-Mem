@@ -1,0 +1,165 @@
+<html>
+<head>
+    <title>Register Calendar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            background-color: #f1f1f1;
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            padding: 10px 20px;
+            margin: 0 5px;
+        }
+        .navbar a.active {
+            border-bottom: 2px solid blue;
+        }
+        .container {
+            padding: 20px;
+        }
+        .date-picker {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .date-input-container {
+            display: inline-block;
+            position: relative;
+        }
+        .date-input-container input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 150px;
+        }
+        .date-input-container i {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #e0e0e0;
+        }
+        .am {
+            background-color: #ffffcc;
+        }
+        .pm {
+            background-color: #cce5ff;
+        }
+        .working {
+            background-color: #ccffcc;
+        }
+        .not-working {
+            background-color: #ffcccc;
+        }
+        .legend {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .legend div {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        .legend div span {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+            margin-right: 5px;
+            text-align: center;
+            line-height: 30px;
+        }
+        .save-button {
+            display: flex;
+            justify-content: center;
+        }
+        .save-button button {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index1.html" class="active">Register Calendar</a>
+        <a href="index2.html">Team View Calendar</a>
+        <a href="index3.html">Task</a>
+    </div>
+    <div class="container">
+        <div class="date-picker">
+            <label for="from-date">From</label>
+            <div class="date-input-container">
+                <input type="text" id="from-date" placeholder="dd/mm/yyyy">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+            <label for="to-date" style="margin-left: 20px;">To</label>
+            <div class="date-input-container">
+                <input type="text" id="to-date" placeholder="dd/mm/yyyy">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+        </div>
+        <table>
+            <tr>
+                <th>Total active work</th>
+                <th>Section</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <td rowspan="2"></td>
+                <td class="am">AM</td>
+                <td class="not-working">N</td>
+                <td class="working">Y</td>
+                <td class="working">Y</td>
+            </tr>
+            <tr>
+                <td class="pm">PM</td>
+                <td class="not-working">N</td>
+                <td class="working">Y</td>
+                <td class="working">Y</td>
+            </tr>
+        </table>
+        <div class="legend">
+            <div>
+                <span class="working">Y</span> Working
+            </div>
+            <div>
+                <span class="not-working">N</span> Not working
+            </div>
+        </div>
+        <div class="save-button">
+            <button><i class="fas fa-save"></i> Save</button>
+        </div>
+    </div>
+</body>
+</html>

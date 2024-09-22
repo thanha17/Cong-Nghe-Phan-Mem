@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .tab {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            background-color: #e0e0e0;
+            cursor: pointer;
+        }
+        .tab.active {
+            background-color: #fff;
+            border-bottom: 2px solid #000;
+        }
+        .filter {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .filter label {
+            margin-right: 10px;
+        }
+        .filter input {
+            padding: 5px 10px;
+            margin-right: 10px;
+            position: relative;
+        }
+        .filter .fa-calendar-alt {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        .tasks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .task {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 10px;
+            width: 200px;
+            height: 150px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+        .task p {
+            margin: 5px 0;
+        }
+        .task.highlight {
+            border: 2px solid #800080;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #fff;
+            padding: 20px;
+            border-left: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .sidebar h3 {
+            margin-top: 0;
+        }
+        .sidebar a {
+            display: block;
+            margin-bottom: 10px;
+            color: #0000ff;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        .modal {
+            display: none; /* Initially hidden */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
+            width: calc(100% - 20px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group .buttons {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .form-group .buttons button {
+            padding: 8px 16px;
+            margin-left: 10px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .form-group .buttons button:hover {
+            background-color: #0056b3;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .assign-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .assign-btn i {
+            margin-right: 8px;
+        }
+        .assign-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab"><a href="index1.html">Register Calendar</a></div>
+            <div class="tab"><a href="index2.html" class="active">Team View Calendar</a></div>
+            <div class="tab active"><a href="index3.html">Task</a></div>
+        </div>
+        <div class="filter">
+            <label for="from">From</label>
+            <div style="position: relative;">
+                <input type="text" id="from" placeholder="dd/mm/yyyy">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+            <label for="to">To</label>
+            <div style="position: relative;">
+                <input type="text" id="to" placeholder="dd/mm/yyyy">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+        </div>
+        <div class="tasks">
+            <div class="task">
+                <p>Title:</p>
+                <p>From: dd/mm/yyyy</p>
+                <p>To: dd/mm/yyyy</p>
+                <p>Actor:</p>
+            </div>
+            <div class="task highlight">
+                <p>Title:</p>
+                <p>From: dd/mm/yyyy</p>
+                <p>To: dd/mm/yyyy</p>
+                <p>Actor:</p>
+            </div>
+            <div class="task">
+                <p>Title:</p>
+                <p>From: dd/mm/yyyy</p>
+                <p>To: dd/mm/yyyy</p>
+                <p>Actor:</p>
+            </div>
+            <div class="task">
+                <p>Title:</p>
+                <p>From: dd/mm/yyyy</p>
+                <p>To: dd/mm/yyyy</p>
+                <p>Actor:</p>
+            </div>
+            <div class="task">
+                <p>Title:</p>
+                <p>From: dd/mm/yyyy</p>
+                <p>To: dd/mm/yyyy</p>
+                <p>Actor:</p>
+            </div>
+        </div>
+        <button id="assign-task-btn" class="assign-btn">
+            <i class="fas fa-tasks"></i> Assign Task
+        </button>
+    </div>
+    <div class="sidebar">
+        <h3>Name</h3>
+        <a href="#">All</a>
+        <a href="#">Nguyễn Phúc Bảo</a>
+        <a href="#">Nguyễn Quang Thành</a>
+        <a href="#">Trương Hồng Hạnh</a>
+    </div>
+
+    <!-- Modal for Task Form -->
+    <div class="modal" id="task-modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="text" id="date" name="date" placeholder="dd/mm/yyyy">
+            </div>
+            <div class="form-group">
+                <label for="section">Section:</label>
+                <input type="text" id="section" name="section">
+            </div>
+            <div class="form-group buttons">
+                <button class="confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('task-modal');
+        const assignTaskBtn = document.getElementById('assign-task-btn');
+        const closeModal = document.getElementById('close-modal');
+
+        assignTaskBtn.onclick = function() {
+            modal.style.display = 'flex';
+        };
+
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>
